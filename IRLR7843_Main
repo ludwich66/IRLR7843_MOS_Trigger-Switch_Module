@@ -1,1 +1,25 @@
-IRLR7843 MOS Module
+
+IRLR7843 MOS Module (ALI-Express)
+PICTURE see KICAD File
+
+
+Label 40A Continious
+Very Low RDS(on) at 4.5V VGS
+
+
+DIM: 17 mm x 7 mm
+V_DS 30 V / RDS(on) 3,3 mΩ
+
+
+V_GS_max +-20V
+ID @ TC =  25°C, Continuous Drain Current VGS @ 10V, 161A
+ID @ TC = 100°C, Continuous Drain Current VGS @ 10V, 113A
+
+PD @TC = 25°C Maximum Power Dissipation  140 W
+PD @TC = 100°C Maximum Power Dissipation  71 W
+
+
+
+
+
+
