@@ -2,7 +2,6 @@ Reverse engineering of "IRLR7843 MOS Module" (ALI-Express)
 
 ![PICTURE see KICAD File](https://github.com/ludwich66/IRLR7843_MOS_Trigger-Switch_Module/blob/main/LR7843_FET-Module.jpg)
 
-Label 40A Continious
 
 Very Low RDS(on) at 4.5V VGS (see Table)
 
@@ -52,3 +51,58 @@ PD @TC = 100°C Maximum Power Dissipation  71 W
 | 4,8 | 153 | <204 |
 | 4,9 | 154 | <205 |
 | 5,0 | 155 | <206 |
+
+KI
+
+# Welche Wärmeabfuhr ist bei einer Platinengröße von 7 x 17 mm gut durchkontaktiert zu erwarten?
+
+Max Strom bei 4,5 V bzw 3,3 V
+
+Für eine Platine mit den Maßen 7 mm x 17 mm (also 119 mm²) und guter Durchkontaktierung zur Wärmeabfuhr können bei MOSFETs ähnliche Größenordnungen für den Wärmewiderstand angenommen werden:
+
+- Wärmewiderstand von Drain-Anschluss zur Platine (Thermal Pad) durch Durchkontaktierung: ca. 1–3 K/W, abhängig von Anzahl, Durchmesser und Layout der Durchkontaktierungen.
+- Platinen-Wärmewiderstand zur Umgebung bei guter Kühlung (z.B. Kühlkörper, Lüfter): ca. 5–15 K/W je nach Design.
+- Gesamt-Wärmewiderstand ohne aktive Kühlung typ. 10–20 K/W für kleine Platinen.
+
+
+### Abschätzung maximaler Dauerstrom
+
+Die Verlustleistung $P = I^2 \cdot R_{DS(on)}$ und zulässige Temperaturerhöhung $\Delta T$ bestimmen den Maximalstrom $I_{max}$.
+
+Bei typischem MOSFET $R_{DS(on)}$ von:
+
+- 3,3 V Gate: ca. 4,5 mΩ
+- 4,5 V Gate: ca. 3,2 mΩ
+
+Angenommen maximale Gehäusetemperaturdifferenz zur Umgebung $\Delta T = 50\,^\circ C$
+
+Mit Wärmewiderstand $R_{th} = 10\,K/W$ als Beispiel:
+
+$$
+P_{max} = \frac{\Delta T}{R_{th}} = \frac{50}{10} = 5\,W
+$$
+
+Maximaler Strom:
+
+$$
+I_{max} = \sqrt{\frac{P_{max}}{R_{DS(on)}}}
+$$
+
+Für 3,3 V Gate:
+
+$$
+I_{max} = \sqrt{\frac{5}{0,0045}} = \sqrt{1111} \approx 33\,A
+$$
+
+Für 4,5 V Gate:
+
+$$
+I_{max} = \sqrt{\frac{5}{0,0032}} = \sqrt{1562} \approx 39\,A
+$$
+
+### Fazit
+
+- Bei der kleinen Platine mit guter Durchkontaktierung und guter Kühlung sind Dauerströme um 30–40 A bei den beiden Gate-Spannungen realistisch, ohne dass der MOSFET überhitzt.
+- Höhere Ströme sind nur mit besserer Kühlung (z.B. Kühlkörper, aktivem Lüfter) oder zusätzlicher Wärmeableitung möglich.
+
+Diese Werte sind Näherungen, da die tatsächliche Kühlleistung von vielen Platinen- und Umweltfaktoren abhängt. Für Dauerbetrieb ist eine Temperaturüberwachung und thermische Simulation empfehlenswert.
